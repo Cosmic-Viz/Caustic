@@ -5,6 +5,7 @@
 #include "vec3.h"
 
 class material;
+class aabb;
 
 class hit_record {
 public:
@@ -25,6 +26,7 @@ public:
     virtual ~hittable() = default;
 
     virtual bool hit(const ray& r, double t_min, double t_max, hit_record& rec) const = 0;
+    virtual aabb bounding_box() const = 0;
 };
 
 #endif
