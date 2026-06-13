@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"I:/Caustic/Caustic/out/build/msvc-Debug/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

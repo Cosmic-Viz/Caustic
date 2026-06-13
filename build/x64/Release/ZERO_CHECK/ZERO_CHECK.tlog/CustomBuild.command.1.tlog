@@ -1,0 +1,10 @@
+^I:\CAUSTIC\CAUSTIC\BUILD\CMAKEFILES\AC1BC1C02F45D5C1D3302065D2D7A463\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SI:/Caustic/Caustic -BI:/Caustic/Caustic/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file I:/Caustic/Caustic/build/Caustic.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\caustic.dir/objects.a
+I:\MINGW\bin\ar.exe qc CMakeFiles\caustic.dir/objects.a @CMakeFiles\caustic.dir\objects1.rsp
+I:\MINGW\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\caustic.dir/objects.a -Wl,--no-whole-archive -o caustic.exe -Wl,--out-implib,libcaustic.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\caustic.dir\linkLibs.rsp

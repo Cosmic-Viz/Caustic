@@ -32,27 +32,7 @@ public:
 
         auto ray_entry_t = [&r](const aabb &box, double t_min_local, double t_max_local) -> double
         {
-            // Compute entry t using slab intersection (duplicated to avoid changing aabb API).
-            double t0 = t_min_local;
-            double t1 = t_max_local;
-
-            for (int a = 0; a < 3; a++)
-            {
-                const double invD = 1.0 / r.direction()[a];
-                double slab_t0 = (box.min()[a] - r.origin()[a]) * invD;
-                double slab_t1 = (box.max()[a] - r.origin()[a]) * invD;
-
-                if (invD < 0.0)
-                    std::swap(slab_t0, slab_t1);
-
-                t0 = fmax(t0, slab_t0);
-                t1 = fmin(t1, slab_t1);
-
-                if (t1 <= t0)
-                    return infinity; // no intersection in range
-            }
-
-            return t0;
+            return box.entry_time(r, t_min_local, t_max_local);
         };
 
         const bool has_left = (left != nullptr);

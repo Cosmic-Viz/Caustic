@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"I:/Caustic/Caustic/out/build/mingw-Debug/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,10 @@
+^I:\CAUSTIC\CAUSTIC\OUT\BUILD\MSVC-DEBUG\CMAKEFILES\77A0954133EEC8F38BD5D12E7DC822D5\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SI:/Caustic/Caustic -BI:/Caustic/Caustic/out/build/msvc-Debug --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file I:/Caustic/Caustic/out/build/msvc-Debug/Caustic.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
