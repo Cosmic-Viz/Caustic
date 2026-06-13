@@ -14,7 +14,13 @@ A custom-built ray tracer based on "Ray Tracing in One Weekend" by Peter Shirley
   - Dielectric (transparent/glass)
 - **Camera**: Realistic camera with adjustable aperture for depth of field
 - **Sampling**: Multi-sample anti-aliasing
-- **Acceleration**: OpenMP parallel rendering
+- **Acceleration**: BVH acceleration structure
+
+## AABB / BVH Optimization
+This project includes an optimized AABB slab intersection path:
+- **Ray-cached inverse direction + sign bits** stored in `ray`.
+- `aabb::hit()` uses cached data to avoid repeated per-axis divisions.
+- BVH traversal ordering reuses `aabb::entry_time()` to avoid duplicate slab math.
 
 ## Building
 
@@ -58,8 +64,6 @@ Edit `src/main.cpp` to adjust:
 - [ ] Normal mapping
 - [ ] Bump mapping
 - [ ] More material types (emissive, subsurface scattering)
-- [ ] BVH acceleration structure
-- [ ] Configurable scene files
 - [ ] GPU acceleration (CUDA/OptiX)
 
 ## References
@@ -70,3 +74,4 @@ Edit `src/main.cpp` to adjust:
 ## License
 
 MIT License - Feel free to use and modify this code
+
