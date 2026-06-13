@@ -1,0 +1,3 @@
+I:/Caustic/Caustic/out/build/mingw-Debug/CMakeFiles/caustic.dir
+I:/Caustic/Caustic/out/build/mingw-Debug/CMakeFiles/edit_cache.dir
+I:/Caustic/Caustic/out/build/mingw-Debug/CMakeFiles/rebuild_cache.dir
