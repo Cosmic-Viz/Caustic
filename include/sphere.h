@@ -2,20 +2,32 @@
 #define SPHERE_H
 
 #include "hittable.h"
+#include "aabb.h"
 #include "vec3.h"
 
 class sphere : public hittable {
 public:
     sphere() {}
     sphere(point3 cen, double r, std::shared_ptr<material> m)
-        : center(cen), radius(r), mat_ptr(m) {}
+        : center(cen), radius(r), mat_ptr(m) {
+        update_bounding_box();
+    }
 
     virtual bool hit(const ray& r, double t_min, double t_max, hit_record& rec) const override;
+    virtual aabb bounding_box() const override { return bbox; }
 
 public:
     point3 center;
     double radius;
     std::shared_ptr<material> mat_ptr;
+
+private:
+    aabb bbox;
+
+    void update_bounding_box() {
+        point3 offset(radius, radius, radius);
+        bbox = aabb(center - offset, center + offset);
+    }
 };
 
 bool sphere::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
