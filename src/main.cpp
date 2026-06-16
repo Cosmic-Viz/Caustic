@@ -5,6 +5,12 @@
 #include "material.h"
 
 #include "sphere.h"
+#include "aabox.h"
+#include "xy_rect.h"
+#include "xz_rect.h"
+#include "yz_rect.h"
+#include "cylinder.h"
+#include "cone.h"
 #include <iostream>
 #include <omp.h>
 
@@ -44,16 +50,30 @@ int main()
 
     auto material_ground = make_shared<lambertian>(color(0.5, 0.5, 0.5));
     auto material_center = make_shared<lambertian>(color(0.1, 0.2, 0.5));
-
     auto material_left = make_shared<dielectric>(1.5);
-
     auto material_right = make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
+    auto material_pink = make_shared<lambertian>(color(0.9, 0.2, 0.6));
+    auto material_green = make_shared<metal>(color(0.2, 0.8, 0.3), 0.05);
 
+    // Ground plane approximation via huge sphere
     world.add(make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
+
+    // Keep a couple of spheres
     world.add(make_shared<sphere>(point3(0.0, 0.0, -1.0), 0.5, material_center));
     world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
-    world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.45, material_left));
     world.add(make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
+
+    // New primitives demo
+    // AABB box (axis-aligned cuboid)
+    world.add(std::make_shared<aabox>(point3(-0.6, 0.1, -3.0), point3(0.6, 1.2, -2.0), material_pink));
+
+    // Rectangles (finite) at different planes
+    world.add(std::make_shared<xy_rect>(-1.0, 1.0, -0.5, 0.7, -2.5, material_green));
+    world.add(std::make_shared<xz_rect>(-1.0, 1.0, -2.0, 0.5, -0.2, material_center));
+    // Cylinder aligned with Y-axis, radius 0.4, y in [0,1.4]
+    world.add(std::make_shared<cylinder>(0.0, 1.4, 0.4, material_right, true));
+    // Cone aligned with Y-axis, from radius 0.0 at y=0 to 0.45 at y=1.3
+    world.add(std::make_shared<cone>(0.0, 1.3, 0.0, 0.45, material_left));
 
     // Wrap scene objects in BVH for faster ray traversal
     hittable_list bvh_world;
